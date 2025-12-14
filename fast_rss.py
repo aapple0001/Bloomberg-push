@@ -45,7 +45,7 @@ def fetch_news():
             print("📭 未抓取到任何路透资讯")
             return None, None
         latest_link = news_list[0]["link"].strip()
-        print(f"📭 成功抓取到{len(news_list)}条路透资讯")
+        print(f"📭 成功抓取到{len(news_list)}条彭博资讯")
         return news_list, latest_link
     except Exception as e:
         print(f"❌ 资讯抓取失败：{str(e)}")
@@ -83,7 +83,7 @@ def check_push():
 # 生成邮件内容（核心修复：提升时间样式优先级，确保黄色生效）
 def make_content(all_news):
     if not all_news:
-        return "暂无可用的路透资讯"
+        return "暂无可用的彭博资讯"
     news_list = all_news[:300]  # 推300条
 
     # ---------------------- 颜色配置（可直接改下面的颜色代码） ----------------------
@@ -95,8 +95,8 @@ def make_content(all_news):
     link_text_color = "#4CAF50"# 「原文链接」文字颜色（绿色，区分普通文字）
     # -----------------------------------------------------------------------------
 
-    # 标题：「路透速递」（自定义颜色+加粗，更醒目）
-    title = f"<p><strong><span style='color:{title_color};'>「路透速递」</span></strong></p>"
+    # 标题：「彭博速递」（自定义颜色+加粗，更醒目）
+    title = f"<p><strong><span style='color:{title_color};'>「彭博速递」</span></strong></p>"
 
     content = []
     for i, news in enumerate(news_list, 1):
@@ -118,7 +118,7 @@ def make_content(all_news):
 # 发送邮件（HTML格式支持超链接，容错优化）
 def send_email(content):
     msg = MIMEText(content, "html", "utf-8")
-    msg["Subject"] = "「路透速递」"  # 邮件主题与内容标题统一
+    msg["Subject"] = "「彭博速递」"  # 邮件主题与内容标题统一
     msg["From"] = SENDER_EMAIL
     msg["To"] = RECEIVER_EMAIL
     try:
